@@ -33,16 +33,25 @@ $(document).ready(function() {
             if ($('.selected').length == 2) {
                 if ($('.selected').first().data('cardValue') == $('.selected').last().data('cardValue')) {
                     $('.selected').each(function() {
-                        $(this).animate({opacity: 0}).removeClass('unmatched');
+                        $(this).animate({ opacity: 0 }).removeClass('unmatched');
                     });
-                } else {
+                    $('.selected').each(function() {
+                        $(this).removeClass('selected');
+                    });
+                    app.checkWin();
+                }
+                else {
                     setTimeout(function() {
-                        $(this).html('');
+                        $('.selected').each(function() {
+                            $(this).html('').removeClass('selected');
+                        });
                     }, 1000);
                 }
-                $('.selected').each(function() {
-                    $(this).removeClass('selected');
-                });
+            }
+        },
+        checkWin: function() {
+            if ($('.unmatched').length === 0) {
+                $('.container').html('<h1> You Won!</h1>');
             }
         }
     };
